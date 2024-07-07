@@ -24,9 +24,9 @@ tokio = { version = "1", features = [
 
 [features]
 futures = ["tokio", "wasm-bindgen-futures"]
-static-init = ["once_cell"]
+static-init = []
 time = []
-local = []
 sync = []
+once = ["once_cell"]
 cell = ["paste"]
-all = ["futures", "static-init", "time", "local", "sync", "cell"]
+all = ["futures", "static-init", "time", "once", "sync", "cell"]
