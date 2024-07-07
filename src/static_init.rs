@@ -27,7 +27,7 @@ macro_rules! static_init {
         }
 
         #[cfg(not(target_arch="wasm32"))]
-        $vis static $name: $crate::local::LocalKey<$t> = const $crate::local::LocalKey::new($init);
+        $vis static $name: $crate::static_init::LocalKey<$t> = const $crate::static_init::LocalKey::new($init);
 
         $crate::local!($($rest)*);
     );
@@ -39,9 +39,9 @@ macro_rules! static_init {
         }
 
         #[cfg(not(target_arch="wasm32"))]
-        $vis static $name: $crate::local::LocalKey<$t> = const $crate::local::LocalKey::new($init);
+        $vis static $name: $crate::static_init::LocalKey<$t> = const $crate::static_init::LocalKey::new($init);
 
-        $crate::once!($($rest)*);
+        $crate::static_init!($($rest)*);
     );
 
     // process multiple declarations
@@ -52,9 +52,9 @@ macro_rules! static_init {
         }
 
         #[cfg(not(target_arch="wasm32"))]
-        $vis static $name: $crate::local::LocalKey<$t> = $crate::local::LocalKey::new($init);
+        $vis static $name: $crate::static_init::LocalKey<$t> = $crate::static_init::LocalKey::new($init);
 
-        $crate::once!($($rest)*);
+        $crate::static_init!($($rest)*);
     );
 
     // handle a single declaration
@@ -64,8 +64,8 @@ macro_rules! static_init {
             $vis static $name: $t = const $init;
         }
         #[cfg(not(target_arch="wasm32"))]
-        $vis static $name: $crate::local::LocalKey<$t> = $crate::local::LocalKey::new($init);
+        $vis static $name: $crate::static_init::LocalKey<$t> = $crate::static_init::LocalKey::new($init);
 
-        $crate::once!($($rest)*);
+        $crate::static_init!($($rest)*);
     );
 }
