@@ -16,7 +16,7 @@ impl<T> LocalKey<T> {
 }
 
 #[macro_export]
-macro_rules! local {
+macro_rules! static_init {
     // empty (base case for the recursion)
     () => {};
 

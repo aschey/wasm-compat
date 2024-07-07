@@ -2,10 +2,10 @@
 pub mod cell;
 #[cfg(feature = "futures")]
 pub mod futures;
-#[cfg(feature = "local")]
-pub mod local;
 #[cfg(feature = "once")]
 pub mod once;
+#[cfg(feature = "static-init")]
+pub mod static_init;
 #[cfg(feature = "sync")]
 pub mod sync;
 #[cfg(feature = "time")]
