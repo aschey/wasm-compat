@@ -42,9 +42,9 @@ macro_rules! numeric_cell {
         impl $name {
             #[cfg(target_arch = "wasm32")]
             pub fn add(&self, val: $type_name) -> $type_name {
-                let prev = self.0.borrow();
+                let prev = *self.0.borrow();
                 *self.0.borrow_mut() += val;
-                *prev
+                prev
             }
 
             #[cfg(not(target_arch = "wasm32"))]
@@ -54,9 +54,9 @@ macro_rules! numeric_cell {
 
             #[cfg(target_arch = "wasm32")]
             pub fn sub(&self, val: $type_name) -> $type_name {
-                let prev = self.0.borrow();
+                let prev = *self.0.borrow();
                 *self.0.borrow_mut() -= val;
-                *prev
+                prev
             }
 
             #[cfg(not(target_arch = "wasm32"))]
@@ -66,9 +66,9 @@ macro_rules! numeric_cell {
 
             #[cfg(target_arch = "wasm32")]
             pub fn max(&self, val: $type_name) -> $type_name {
-                let prev = self.0.borrow();
+                let prev = *self.0.borrow();
                 *self.0.borrow_mut() = prev.max(val);
-                *prev
+                prev
             }
 
             #[cfg(not(target_arch = "wasm32"))]
@@ -78,9 +78,9 @@ macro_rules! numeric_cell {
 
             #[cfg(target_arch = "wasm32")]
             pub fn min(&self, val: $type_name) -> $type_name {
-                let prev = self.0.borrow();
+                let prev = *self.0.borrow();
                 *self.0.borrow_mut() = prev.min(val);
-                *prev
+                prev
             }
 
             #[cfg(not(target_arch = "wasm32"))]
