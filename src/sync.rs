@@ -1,6 +1,27 @@
 use std::ops::{Deref, DerefMut};
 
 #[cfg(target_arch = "wasm32")]
+pub trait Send {}
+
+#[cfg(target_arch = "wasm32")]
+impl<T> Send for T {}
+
+#[cfg(not(target_arch = "wasm32"))]
+pub trait Send: std::marker::Send {}
+impl<T> Send for T where T: std::marker::Send {}
+
+#[cfg(target_arch = "wasm32")]
+pub trait Sync {}
+
+#[cfg(target_arch = "wasm32")]
+impl<T> Sync for T {}
+
+#[cfg(not(target_arch = "wasm32"))]
+pub trait Sync: std::marker::Sync {}
+impl<T> Sync for T where T: std::marker::Sync {}
+
+#[cfg(not(target_arch = "wasm32"))]
+#[cfg(target_arch = "wasm32")]
 pub struct Mutex<T>(std::cell::RefCell<T>);
 
 #[cfg(not(target_arch = "wasm32"))]
